@@ -49,3 +49,47 @@ func TestGetGradeF(t *testing.T) {
 		t.Errorf("Expected GetGrade to return '%s'; got '%s' instead", expected_value, actual_value)
 	}
 }
+
+func TestGetGradeC(t *testing.T) {
+	expected_value := "C"
+
+	gradeCalculator := NewGradeCalculator()
+
+	gradeCalculator.AddGrade("open source assignment", 75, Assignment)
+	gradeCalculator.AddGrade("exam 1", 72, Exam)
+	gradeCalculator.AddGrade("essay on ai ethics", 70, Essay)
+
+	actual_value := gradeCalculator.GetFinalGrade()
+
+	if expected_value != actual_value {
+		t.Errorf("Expected GetGrade to return '%s'; got '%s' instead", expected_value, actual_value)
+	}
+}
+
+func TestGetGradeD(t *testing.T) {
+	expected_value := "D"
+
+	gradeCalculator := NewGradeCalculator()
+
+	gradeCalculator.AddGrade("open source assignment", 65, Assignment)
+	gradeCalculator.AddGrade("exam 1", 62, Exam)
+	gradeCalculator.AddGrade("essay on ai ethics", 60, Essay)
+
+	actual_value := gradeCalculator.GetFinalGrade()
+
+	if expected_value != actual_value {
+		t.Errorf("Expected GetGrade to return '%s'; got '%s' instead", expected_value, actual_value)
+	}
+}
+
+func TestGradeTypeString(t *testing.T) {
+	cases := map[GradeType]string{
+		Assignment: "assignment",
+		Exam:       "exam",
+		Essay:      "essay"}
+	for gt, want := range cases {
+		if got := gt.String(); got != want {
+			t.Errorf("Expected String() to return '%s'; got '%s' instead", want, got)
+		}
+	}
+}
